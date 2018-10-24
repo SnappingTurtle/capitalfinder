@@ -1,0 +1,17 @@
+{
+    "extends": "../tslint.json",
+    "rules": {
+        "directive-selector": [
+            true,
+            "attribute",
+            "georadix",
+            "camelCase"
+        ],
+        "component-selector": [
+            true,
+            "element",
+            "georadix",
+            "kebab-case"
+        ]
+    }
+}
