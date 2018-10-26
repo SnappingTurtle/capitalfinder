@@ -1,0 +1,22 @@
+#app-window {
+    display: flex;
+    flex-direction: column;
+}
+
+#title-bar {
+    display: flex;
+    height: 100px;
+    width: 100%;
+    background-color: grey;
+}
+
+#map-content-area {
+    display: flex;
+    flex-grow: 1;
+    background-color: lightsteelblue;
+}
+
+#georadix-map {
+    height: 100%;
+    width: 100%;
+}
