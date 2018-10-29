@@ -1,0 +1,22 @@
+<div class="button-bar-row">
+  <button 
+    mat-fab color="accent" 
+    (click)="buttonService.toggleStates()"
+    matTooltip="Toggle the State Sidebar">
+    States
+  </button>
+  <button 
+    mat-mini-fab color="basic" 
+    (click)="buttonService.back()" 
+    [disabled]="mapService.stateHistoryPointer === 0"
+    matTooltip="Navigate to last State Capital you visited">
+    <mat-icon aria-label="go back one visit">chevron_left</mat-icon>
+  </button>
+  <button 
+    mat-mini-fab color="basic" 
+    (click)="buttonService.forward()" 
+    [disabled]="mapService.stateHistoryPointer === mapService.MAX_HISTORY-1 || !mapService.stateHistory[mapService.stateHistoryPointer + 1]"
+    matTooltip="Navigate forward in your visit list">
+    <mat-icon aria-label="go back one visit">chevron_right</mat-icon>
+  </button>
+</div>

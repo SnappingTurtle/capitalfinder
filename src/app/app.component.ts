@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { MapService } from './services/map.service';
 import { MapConfig } from './config/mapConfig';
 
+import { Subject } from 'rxjs';
+
 @Component({
   selector: 'georadix-root',
   templateUrl: './app.component.html',
@@ -9,14 +11,25 @@ import { MapConfig } from './config/mapConfig';
 })
 export class AppComponent {
   title = 'georadix';
+  appTitleText="Georadix Example App";
   mapOptions = {
-    centreZoom: MapConfig.mapCentreUSA, 
-    basemap: MapConfig.baseMaps['National Geographic']
+    mapCentre: MapConfig.mapCentre,
+    mapZoom: MapConfig.mapZoom,
+    basemap: MapConfig.baseMaps[MapConfig.basemap]
   }
+  stateButtonO$: Subject<any>; // communicate button gesture
 
   constructor(
     private mapService: MapService)
   {
-    //this.mapService.doSomething();
+    this.stateButtonO$ = new Subject();
+  }
+
+  toggleStates() {
+    this.stateButtonO$.next(); // simple case, no need for subject matter
+  }
+
+  gotoCity(stateModel) {
+    this.mapService.centreViewOnCity(stateModel);
   }
 }

@@ -1,10 +1,34 @@
 
 <div id="app-window">
-  <div id="title-bar"></div>
+  <div id="title-control-area">
+    <div id="title-bar">
+      <div class="header-text">{{appTitleText}}</div>
+    </div>
+    <div id="control-bar">
+      <georadix-button-bar></georadix-button-bar>
+    </div>
+  </div>
   
   <div id="map-content-area">
-    <div id="left-sidebar"></div>
-    <georadix-map mapOptions="mapOptions"></georadix-map>
+    <georadix-sidebar 
+      [closedOffsetX]= "-300" 
+      [openOffsetX]="0" 
+      [offsetTop]="170"
+      [sidebarWidth]="300"
+      [heightPercent]="80"
+      [sidebarMode]="'left'">
+
+      <!-- state list could be it's own component if more complex.  Could use routing to load any component into sidebar -->
+      <div id="state-list-container">
+        <li *ngFor="let stateModel of mapService.stateData">
+          <div (click)="gotoCity(stateModel)" class="hover-link-button">
+            {{stateModel.city + ", " + stateModel.state}}
+          </div>
+        </li>
+      </div>
+
+    </georadix-sidebar>
+    <georadix-map [mapOptions]="mapOptions"></georadix-map>
   </div> 
 </div>
 

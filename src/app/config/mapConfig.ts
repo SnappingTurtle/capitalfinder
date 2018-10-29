@@ -2,11 +2,14 @@ import { IZoomAndCentre, IBasemaps, IBasemap } from '../models/IMapTypes';
 
 
 export class MapConfig {
-    static readonly mapCentreUSA: IZoomAndCentre = {
-        centre: [-98.849, 40.366],
-        zoom: 6
-    }
+    static readonly mapCentre: Array<number> = [-98.849, 40.366];
+    static readonly mapZoom: number = 5;
+    static readonly basemap: string = "Streets";
+    
 
+    static readonly stateSource: string = "https://raw.githubusercontent.com/vega/vega/master/docs/data/us-state-capitals.json";
+
+    // some basemap options
     static readonly baseMaps: any =  {
         'Open Street Maps':
             { 
@@ -71,15 +74,7 @@ export class MapConfig {
                 url: 'http://server.arcgisonline.com/arcgis/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}',
                 thumbnailUrl: 'http://www.arcgis.com/sharing/rest/content/items/8b3b470883a744aeb60e5fff0a319ce7/info/thumbnail/light_gray_canvas.jpg',
                 labelColor: 'rgba(0,255,0,1)'
-              },
-        'ESRI OSM':
-              {
-                title: "ESRI OSM",
-                url: 'http://server.arcgisonline.com/arcgis/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}',
-                thumbnailUrl: 'http://www.arcgis.com/sharing/rest/content/items/5d2bfa736f8448b3a1708e1f6be23eed/info/thumbnail/temposm.jpg',
-                labelColor: 'rgba(0,255,0,1)'
-              }
-        
+              }        
     }     
     
 }

@@ -1,22 +1,66 @@
 #app-window {
-    display: flex;
-    flex-direction: column;
+    height: 100%;
+    
 }
 
-#title-bar {
+#title-control-area {
     display: flex;
+    flex-direction: column;
     height: 100px;
     width: 100%;
-    background-color: grey;
+    background-color: #595c80;
+    color: lightgray;
+    border: solid 1px black;
+}
+#title-bar {
+    display: flex;
+    flex-grow: 1;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    .header-text {
+        font-size: 28px;
+        display: flex;
+        width: 400px;
+    }
+    
 }
 
 #map-content-area {
-    display: flex;
-    flex-grow: 1;
-    background-color: lightsteelblue;
+    height: calc( 100% - 100px );
 }
 
-#georadix-map {
+georadix-map {
     height: 100%;
     width: 100%;
+}
+
+#control-bar button, a {
+  margin-right: 8px;
+}
+
+
+
+#state-list-container {
+    height: 100%;
+    overflow: auto;
+   
+
+    li {
+        list-style-type: none;
+        margin-left: 20px;
+        font-size: 16px;
+    
+    } 
+    .hover-link-button {
+        padding-left: 20px;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .hover-link-button:hover {
+
+        background-color: lightblue;
+        cursor: pointer;
+    }
 }

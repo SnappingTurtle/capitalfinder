@@ -8,6 +8,7 @@ import { MapService } from '../../services/map.service';
 })
 export class MapComponent implements OnInit {
   @Input() mapOptions: any;
+  @Input() theZoom: number;
 
   constructor(
     private mapService: MapService,
@@ -15,7 +16,8 @@ export class MapComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.mapService.initMapView(this.elementRef.nativeElement.firstChild, this.mapOptions)
+    // call map service to init self with dom reference and input config
+    this.mapService.initMapView(this.elementRef.nativeElement.firstChild, this.mapOptions);
   }
 
 }

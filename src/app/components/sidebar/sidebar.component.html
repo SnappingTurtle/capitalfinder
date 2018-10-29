@@ -1,0 +1,5 @@
+<div #sidebarcontainer id="sidebar-container" class="sidebarDiv" [style.height.%]="heightPercent"
+  [@openLeftSidebarDrawer]="{value: sidebarDrawerState, params: {sidebarWidth: sidebarWidth, closedOffsetX: closedOffsetX, openOffsetX: openOffsetX, offsetTop: offsetTop, danny: sidebarMode}}"
+  [@openRightSidebarDrawer]="{value: sidebarDrawerState, params: {sidebarWidth: sidebarWidth, closedOffsetX: closedOffsetX, openOffsetX: openOffsetX, offsetTop: offsetTop, danny: sidebarMode}}">
+  <ng-content></ng-content>
+</div>
