@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 // peer events from the button mediator
 import { ButtonMediatorService } from '../components/button-bar/button-mediator.service';
 
+// for popup observable
+import { Subject } from 'rxjs';
+
 // openlayers stuff
 import Map from 'ol/Map';
 import View from 'ol/View';
@@ -38,6 +41,9 @@ export class MapService {
   stateHistoryPointer: number = 0; // points to current visit
   readonly MAX_HISTORY: number = 5;
 
+  // for city popup will emit event to app component
+  cityPopupO$: Subject<any>
+
   // from mapconfig
   stateSource = MapConfig.stateSource;
   bsource: string = "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}"
@@ -53,7 +59,11 @@ export class MapService {
       this.buttonService.navigateForwardButtonClickO$.subscribe(() => {
         this.gotoNextVisit();
       })
-    this.initData();
+
+      this.initData();
+
+      this.cityPopupO$ = new Subject();
+
    }
    
   initData() {
@@ -79,6 +89,9 @@ export class MapService {
     // set the basemap - blank defaults to OSM.org
     this.setBasemapLayer(mapOptions.basemap.url);
 
+    // add any listeners
+    this.addMapListeners();
+
   }
 
   setBasemapLayer(basemap?) {
@@ -98,6 +111,14 @@ export class MapService {
       source: source
     });
     this.map.getLayers().insertAt(0, tileLayer); // basemap added at base
+  }
+
+  addMapListeners() {
+    this.map.on('singleclick', (e:any) => {
+      this.map.forEachFeatureAtPixel(e.pixel, (feature, layer) => {
+        this.cityPopupO$.next(feature); // tell app component of click on feature
+      })
+    })
   }
 
   getStateCapitals() {
@@ -136,6 +157,7 @@ export class MapService {
       let feature: Feature = new Feature({
         geometry: point
       })
+      feature['stateModel'] = states[i];
       feature.setStyle(this.defaultSymbolStyle);
       this.stateLayer.getSource().addFeature(feature);
     }

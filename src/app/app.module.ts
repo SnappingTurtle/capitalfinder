@@ -18,13 +18,15 @@ import { ButtonBarComponent } from './components/button-bar/button-bar.component
 
 // for button bar mediation
 import { ButtonMediatorService } from './components/button-bar/button-mediator.service';
+import { CityDetailDialog } from './components/city-popup/city-detail-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     SidebarComponent,
-    ButtonBarComponent
+    ButtonBarComponent,
+    CityDetailDialog
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,10 @@ import { ButtonMediatorService } from './components/button-bar/button-mediator.s
   providers: [
     MapService,
     ButtonMediatorService
-],
+  ],
+  entryComponents: [
+    CityDetailDialog
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
